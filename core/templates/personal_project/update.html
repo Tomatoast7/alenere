@@ -1,0 +1,24 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Info</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="max-w-lg mx-auto mt-10">
+        <h1 class="text-2xl font-bold mb-4">Update Info</h1>
+        <form method="post">
+            {% for field in form %}
+            {% csrf_token %}
+            {% render_field field class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" placeholder=field.name %}
+      
+            {% endfor %}
+            <button class="btn btn-primary" type="submit">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

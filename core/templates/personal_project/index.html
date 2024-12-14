@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-full overflow-x-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Company</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tite in info %}
+                <tr>
+                    <td class="text-nowrap">{{ tite.firstname }}</td>
+                    <td>{{ tite.lastname }}</td>
+                    <td>{{ tite.phone }}</td>
+                    <td class="text-nowrap">{{ tite.company }}</td>
+                    <td class="flex gap-2">
+                        <!-- Delete Button -->
+                        <form action="{% url 'newdelete' tite.pk %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-error">Delete</button>
+                        </form>
+                        
+                        <!-- Update Button -->
+                        <a href="{% url 'newupdate' tite.pk %}">
+                            <button class="btn btn-info">Update</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'newcreate' %}">
+        <button class="btn btn-accent mt-4">Create A Table</button>
+    </a>  
+</body>
+</html>

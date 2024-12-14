@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}Document{% endblock title %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    
+    {% load static %}
+
+</head>
+<body>
+   
+    <div class="overflow-x-auto">
+        <table class="table">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                </label>
+              </th>
+              <th>Name</th>
+              <th>Job</th>
+              <th>Favorite Color</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+             {% for tablename in models %}
+             <tr>
+                <th>
+                  <label>
+                    <input type="checkbox" class="checkbox" />
+                  </label>
+                </th>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="avatar">
+                      <div class="mask mask-squircle h-12 w-12">
+                        <img
+                          src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                          alt="Avatar Tailwind CSS Component" />
+                      </div>
+                    </div>
+                    <div>
+                      <div class="font-bold">{{tablename.name}}</div>
+                      <div class="text-sm opacity-50">United States</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  Zemlak, Daniel and Leannon
+                  <br />
+                  <span class="badge badge-ghost badge-sm">{{tablename.job}}</span>
+                </td>
+                <td>{{tablename.fav_color}}</td>
+                <th>
+                    <form action="{% url 'core_delete' tablename.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-error">Delete</button>
+                    </form>
+                
+                </th>
+              </tr>
+             {% endfor %}
+           
+            
+          </tbody>
+          <!-- foot -->
+       
+        </table>
+      </div>
+
+    
+</body>
+</html>
